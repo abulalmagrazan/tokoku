@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout::head}"></head>
+<body>
+<div class="shop-index">
+    <!-- header -->
+    <div th:replace="~{layout::header-0}"></div>
+    <!-- end header -->
+    <!-- main -->
+    <div class="main">
+        <div class="shop-form">
+            <form method="post" enctype="multipart/form-data" th:attr="action=@{/shop/shopUpsert}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <input type="hidden" name="id" th:field="${dto.id}">
+                <input type="hidden" th:field="${dto.imagePath}">
+                <h2 th:text="${type}"></h2>
+                <div>
+                    <div class="field-validation-error" th:errors="${dto.shopName}"></div>
+                    <input type="text" name="shopName" id="shopName" placeholder="Shop Name" th:field="${dto.shopName}" />
+                </div>
+                <div>
+                    <div class="field-validation-error" th:errors="${dto.detail}"></div>
+                    <textarea name="address" id="detail" cols="20" rows="10" placeholder="Detail" th:field="${dto.detail}"></textarea>
+                </div>
+                <div>
+                    <div class="field-validation-error" th:errors="${dto.address}"></div>
+                    <textarea name="address" id="address" cols="20" rows="10" placeholder="Address" th:field="${dto.address}"></textarea>
+                </div>
+                <div>
+                    <div class="field-validation-error" th:errors="${dto.city}"></div>
+                    <input type="text" name="city" id="city" placeholder="City" th:field="${dto.city}"/>
+                </div>
+                <div>
+                    <label for="imagePath" >image</label>
+                    <input type="file" name="imagePath" id="imagePath" th:field="${dto.image}"/>
+                </div>
+                <button class="white-button" th:text="${type}">create New Shop</button>
+            </form>
+        </div>
+    </div>
+    <!-- end main -->
+</div>
+</body>
+</html>

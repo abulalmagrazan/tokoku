@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}" />
+    <link rel="icon" type="image/ico" th:href="@{/resources/image/favicon.ico}">
+    <title>TokoKu</title>
+  </head>
+  <body>
+    <!-- header -->
+    <div class="header" th:fragment="header">
+      <div class="header-wrapper">
+        <div class="logo-header">
+          <img th:src="@{/resources/image/logo/logo2.png}" alt="" />
+          <img th:src="@{/resources/image/logo/logo1.png}" alt="" />
+        </div>
+        <div class="helper">
+          <a href="">Bantuan...</a>
+        </div>
+      </div>
+    </div>
+    <!-- footer -->
+    <div class="footer" th:fragment="footer">footer</div>
+  </body>
+</html>

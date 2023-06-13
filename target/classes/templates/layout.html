@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}" />
+      <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
+      <link rel="icon" type="image/ico" th:href="@{/resources/image/favicon.ico}">
+    <title>TokoKu</title>
+  </head>
+  <body>
+    <!-- seller layout -->
+    <div class="header" th:fragment="header-0">
+        <div class="header-wrapper">
+          <div class="logo-header">
+             <img th:src="@{/resources/image/logo/logo2.png}" alt="" />
+             <img th:src="@{/resources/image/logo/logo1.png}" alt="" />
+          </div>
+          <div class="helper">
+              <form th:attr="action=@{/logout}" method="POST">
+                  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                  <button class="main-button">log out <i class="fas fa-sign-out-alt"></i></button>
+              </form>
+
+          </div>
+        </div>
+      </div>
+    <!-- end seller layout -->
+
+    <!-- Seller   -->
+
+    <!--    navbar-->
+    <nav th:fragment="navigation">
+        <div class="company-logo" >
+            <img th:src="@{/resources/image/logo/logo2-brown.png}" alt="" />
+            <img th:src="@{/resources/image/logo/logo1-brown.png}" alt="" />
+        </div>
+        <a th:href="@{/home/seller(shopId=${shopId})}">
+            <i class="fas fa-chart-bar"></i>
+            <span>Dashboard</span>
+        </a>
+        <a th:href="@{/shop/profile(shopId=${shopId})}">
+            <i class="fas fa-store"></i>
+            <span>Profile</span>
+        </a>
+        <a th:href="@{/product/seller-product(shopId=${shopId})}">
+            <i class="fas fa-list-ul"></i>
+            <span>Product</span>
+        </a>
+        <a href="">
+            <i class="fas fa-mail-bulk"></i>
+            <span>Pesanan</span>
+        </a>
+    </nav>
+    <!--    End Navbar-->
+
+    <!--    Header-->
+    <header th:fragment="header-seller">
+        <div class="header-wrapper">
+            <div class="currentUser">
+                <p th:text="${sellerBreadCrumb.sellerName}">seller</p>
+                <p>/</p>
+                <div class="shop-menu" onmouseleave="dropdownEnd()">
+                    <p class="shop-name" onmouseover="dropdownStart()" th:text="${sellerBreadCrumb.shopName}">shop</p>
+                    <div class="dropdown-float">
+                        <div class="shop-dropdown">
+                            <a th:each="data:${shopList}" th:href="@{/home/seller(shopId=${data.id})}" th:text="${data.value}">shop1</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="logout">
+                <a href="">logout</a>
+            </div>
+        </div>
+    </header>
+    <!--    End Header-->
+
+    <!--    Footer -->
+    <footer th:fragment="footer-seller"></footer>
+    <!--   End Footer -->
+    <!-- End Seller   -->
+
+    <script th:fragment="script">
+          const dr = document.querySelector(".shop-dropdown");
+      function dropdownStart() {
+        if (dr.style.display == "" || dr.style.display == "none") {
+          dr.style.display = "flex";
+        }
+      }
+
+      function dropdownEnd() {
+        if (dr.style.display == "flex") {
+          dr.style.display = "none";
+        }
+      }
+    </script>
+</body>
+</html>

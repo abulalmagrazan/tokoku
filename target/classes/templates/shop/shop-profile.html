@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout::head}"></head>
+<body class="seller-body">
+    <nav th:replace="~{layout::navigation}"></nav>
+    <header th:replace="~{layout::header-seller}"></header>
+    <main>
+        <div class="dasboard">
+            <div class="container">
+                <div class="shop-profile">
+                    <!-- top -->
+                    <div class="top">
+                        <div th:if="${dto.imagePath==null}" >
+                            <img th:src="@{/resources/image/shop/logo2.png}" alt="" />
+                        </div>
+                        <div th:if="${dto.imagePath!=null}" >
+                            <img th:src="@{/resources/image/shop/{path}(path=${dto.imagePath})}" alt="" />
+                        </div>
+
+                        <div class="detail" th:text="${dto.detail}">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, iste in modi facilis tempora debitis et at minima saepe eos.</p>
+                        </div>
+                    </div>
+                    <!-- end Top -->
+                    <div class="content">
+                        <div class="button-action">
+                            <a th:href="@{/shop/shopUpsert(shopId=${shopId})}" class="main-button"> Edit Shop Profile</a>
+                        </div>
+                        <table class="profile">
+                            <tbody>
+                            <tr>
+                                <td>Owner</td>
+                                <td>:</td>
+                                <td th:text="${dto.owner}">Abul Almagrazan</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>:</td>
+                                <td th:text="${dto.address}">Tanjung Duren Utara No.30</td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td>:</td>
+                                <td th:text="${dto.city}">Jakarta Barat</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{layout::footer-seller}"></footer>
+    <script th:replace="~{layout::script}"></script>
+</body>
+</html>

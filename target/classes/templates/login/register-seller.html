@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{sign-layout::head}"> </head>
+  <body>
+    <div class="sign-form">
+      <!-- header -->
+      <div th:replace="~{sign-layout::header}"></div>
+      <!-- main -->
+      <div class="main">
+        <div class="register-form">
+          <form method="POST" enctype="multipart/form-data" th:attr="action=@{/login/seller-register}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <div class="wrapper-register">
+              <div class="account">
+                <input type="text" name="username" id="username" placeholder="Username" th:field="${dto.username}" />
+                <div class="field-validation-error" th:errors="${dto.username}"></div>
+                <input type="password" name="password" id="password" placeholder="Password"  th:field="${dto.password}"/>
+                <div class="field-validation-error" th:errors="${dto.password}"></div>
+                <input type="password" name="retype" id="retype" placeholder="Confirm Password" th:field="${dto.retypePassword}"/>
+                <div class="field-validation-error" th:errors="${dto}"></div>
+<!--                <input type="email" name="email" id="email" placeholder="Email" />-->
+              </div>
+              <div class="profile">
+                <div class="name">
+                  <input type="text" name="firstName" id="firstName" placeholder="FirstName" th:field="${dto.firstName}"/>
+                  <div class="field-validation-error" th:errors="${dto.firstName}"></div>
+                  <input type="text" name="lastName" id="lastName" placeholder="LastName" th:field="${dto.lastName}"/>
+                  <div class="field-validation-error" th:errors="${dto.lastName}"></div>
+                </div>
+                <div class="birhdate">
+                  <label for="birthDate">Birth Date</label>
+                  <input type="date" name="birthDate" id="birthDate" th:field="${dto.birthDate}"/>
+                  <div class="field-validation-error" th:errors="${dto.birthDate}"></div>
+                </div>
+                <div class="gender">
+                  <span>Gender</span>
+                  <div class="radio-row">
+                    <div>
+                      <input type="radio" name="gender" id="male" th:value="male" th:checked="${dto.gender=='male'}"  />
+                      <label for="male">Male</label>
+                    </div>
+                    <div>
+                      <input type="radio" name="gender" id="female" th:value="female" th:checked="${dto.gender=='female'}" />
+                      <label for="female">Female</label>
+                    </div>
+                  </div>
+                </div>
+<!--                <input type="text" name="address" id="address" placeholder="address" th:field="${}"/>-->
+                <input type="text" name="phone" id="phone" placeholder="Phone Number" th:field="${dto.phone}"/>
+                <div class="field-validation-error" th:errors="${dto.phone}"></div>
+              </div>
+            </div>
+            <div class="action">
+              <button type="submit" class="main-button">Daftar Seller</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- footer -->
+      <div th:replace="~{sign-layout::footer}"></div>
+    </div>
+  </body>
+</html>

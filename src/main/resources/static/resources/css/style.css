@@ -1,0 +1,523 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #212337;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1, 15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  height: 100%;
+  font-size: 12px;
+}
+body {
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+  line-height: 1, 5;
+  text-align: left;
+  background-color: #f1f2ea;
+}
+/* shop */
+.shop-index {
+  display: grid;
+  grid-template-rows: 70px 1fr;
+  grid-template-areas: "top" "content";
+}
+
+.shop-index .header {
+  box-shadow: 0 7px 20px 1px gray;
+}
+
+.shop-index .header .header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+  grid-area: top;
+}
+
+.shop-index .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shop-index .main .shop-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.shop-index .main .shop-row .shop-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #fb0000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.shop-index .main .shop-row .shop-card img {
+  height: 70px;
+  width: 70px;
+}
+
+.shop-index .main .shop-form {
+  background-color: #212337;
+  margin-top: 40px;
+  padding: 30px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.shop-index .main .shop-form form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 30px;
+}
+
+.shop-index .main .shop-form form div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 5px;
+}
+
+.shop-index .main .shop-form form div input,
+textarea {
+  width: 300px;
+}
+
+/* seller */
+
+.seller-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  grid-template-rows: 70px 1fr 40px;
+  grid-template-areas: "menu top" "menu content" "menu bottom";
+  background-color: #f1f2ea;
+}
+
+.seller-body nav {
+  background-color: #212337;
+  grid-area: menu;
+}
+
+.seller-body nav .company-logo {
+  display: flex;
+  /* background-color: #f1f2ea; */
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.seller-body nav .company-logo img {
+  height: 50px;
+}
+
+.seller-body nav a {
+  display: grid;
+  grid-template-columns: 35px 1fr;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 18px 0 18px 25px;
+  text-transform: capitalize;
+}
+.seller-body > nav > a > i {
+  color: #ffffff;
+  font-size: 18px;
+}
+.seller-body > nav > a:hover {
+  background-color: #0e1122;
+  border-left: solid 2px #14acf8;
+  padding-left: 23px;
+  color: #14acf8;
+}
+
+.seller-body header {
+  background-color: #f1f2ea;
+  box-shadow: 0 5px 5px -2px rgb(145, 143, 143);
+  grid-area: top;
+}
+
+.seller-body header .header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  /* background-color: #9c9c9e; */
+  height: 100%;
+}
+
+.seller-body header .header-wrapper .currentUser {
+  display: flex;
+}
+
+.seller-body header .header-wrapper .currentUser .shop-menu .dropdown-float {
+  position: absolute;
+}
+.seller-body header .header-wrapper .currentUser .shop-menu .dropdown-float .shop-dropdown {
+  display: none;
+  flex-direction: column;
+  background-color: #212337;
+}
+.seller-body header .header-wrapper .currentUser .shop-menu .dropdown-float .shop-dropdown a {
+  color: #fff;
+  padding: 15px;
+}
+.seller-body header .header-wrapper .currentUser .shop-menu .dropdown-float .shop-dropdown a:hover {
+  background-color: #0e1122;
+  border-left: solid 2px #14acf8;
+  padding-left: 15px;
+  color: #14acf8;
+}
+
+.seller-body main {
+  /* background-color: #f1f2ea; */
+  grid-area: content;
+}
+
+.seller-body main .dasboard {
+  /* background-color: #ff0000; */
+  height: 100%;
+  padding: 20px;
+}
+
+.seller-body main .dasboard .dasboard-card {
+  /* background-color: #8e0bc1; */
+
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.seller-body main .dasboard .dasboard-card .card-2 {
+  height: 150px;
+  width: 230px;
+  display: grid;
+  grid-template-rows: 40px 1fr 40px;
+  color: #ffffff;
+  border-radius: 7px;
+}
+.seller-body main .dasboard .dasboard-card .card-2 a {
+  color: #fff;
+}
+.seller-body main .dasboard .dasboard-card .card-2 .top {
+  background-color: #00000062;
+  padding: 0 20px;
+  border-radius: 7px 7px 0 0;
+}
+.seller-body main .dasboard .dasboard-card .card-2 .content {
+  /* background-color: #527f00; */
+  padding: 0 20px;
+}
+.seller-body main .dasboard .dasboard-card .card-2 .bot {
+  background-color: #00000062;
+  text-align: right;
+  border-radius: 0 0 7px 7px;
+  padding: 0 15px;
+}
+.seller-body main .dasboard .dasboard-card .card-2 .bot a {
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+}
+
+.seller-body main .dasboard .container {
+  /* background-color: #8e0bc1; */
+
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 1000px;
+}
+
+.seller-body main .dasboard .container .shop-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+.seller-body main .dasboard .container .shop-profile .top {
+  display: flex;
+  gap: 40px;
+  border-bottom: solid 1px #0e1122;
+}
+.seller-body main .dasboard .container .shop-profile .top img {
+  width: 100px;
+  height: 100px;
+  margin: 0 0 20px 40px;
+}
+.seller-body main .dasboard .container .shop-profile .top .detail {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 700px;
+  /* background-color: #cd0000; */
+}
+.seller-body main .dasboard .container .shop-profile .content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  /* background-color: #cd0000; */
+}
+
+.card-2.order {
+  background-color: #246ddb;
+}
+.card-2.performances {
+  background-color: #24db5b;
+}
+.card-2.income {
+  background-color: #cfdb24;
+}
+
+.seller-body footer {
+  background-color: #a0a0a0;
+  grid-area: bottom;
+}
+
+/* login */
+.sign-form {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr 30px;
+}
+
+.logo-header img {
+  width: 50px;
+}
+.sign-form .header {
+  box-shadow: 0 7px 20px 1px gray;
+}
+
+.sign-form .header .header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+}
+.sign-form .main {
+  min-height: 100%;
+  height: 100%;
+}
+
+.sign-form .main .wrapper-login {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 100%;
+  height: 100%;
+}
+
+.sign-form .main .wrapper-login .baner-loginform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #ff0404; */
+  width: 50%;
+  min-height: 100%;
+}
+.sign-form .main .wrapper-login .baner-loginform img {
+  width: 50px;
+  height: 50px;
+}
+.sign-form .main .wrapper-login .form {
+  width: 400px;
+  padding: 30px;
+  /* background-color: #050091; */
+}
+
+.sign-form .main .wrapper-login .form .form-wrapper {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 7px 7px -2px gray;
+  border-radius: 10px;
+}
+
+.sign-form .main .wrapper-login .form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sign-form .main .wrapper-login .form form .action {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sign-form .main .register-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  height: 100%;
+}
+
+.sign-form .main .register-form form {
+  background-color: #fff;
+  min-height: 400px;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 7px 7px -2px gray;
+}
+.sign-form .main .register-form form .wrapper-register {
+  display: flex;
+  /* flex-wrap: wrap;                    */
+  gap: 40px;
+}
+.sign-form .main .register-form form .wrapper-register .account {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sign-form .main .register-form form .wrapper-register .profile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sign-form .main .register-form form .action {
+  margin-top: 20px;
+}
+
+/* table */
+
+.product table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+.product thead tr {
+  background-color: #7286d3;
+  border-bottom: #0e1122 solid 1px;
+}
+.product th {
+  padding: 10px;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: #fff2f2;
+}
+
+.product tbody > tr {
+  border-bottom: #0e1122 solid 1px;
+}
+
+.product tbody td {
+  padding: 10px;
+}
+
+.product tbody tr:nth-child(even) {
+  background-color: #7286d3;
+  color: #fff2f2;
+}
+/* .product tbody tr:nth-child(even) a {
+  color: #fff2f2;
+} */
+
+.product table tbody img {
+  height: 70px;
+  width: 70px;
+}
+.product table tbody tr td div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.product tfoot td {
+  padding: 15px;
+  /* text-align: start; */
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination a {
+  color: #212337;
+  border: solid 1px #212337;
+  display: inline-block;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-right: 3px;
+}
+
+.upsert-form table tbody td {
+  padding: 5px;
+}
+td input,
+select,
+textarea {
+  width: 250px;
+}
+/* button */
+button {
+  border: none;
+}
+
+.main-button {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #212337;
+  color: #fff;
+}
+.red-button {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #cb1818;
+  color: #ffffff;
+}
+.warning-button {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #ffb100;
+  color: #212337;
+}
+
+.white-button {
+  border-radius: 5px;
+  padding: 10px;
+  color: #212337;
+  background-color: #fff;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+select {
+  padding: 10px;
+}
+textarea {
+  padding: 10px;
+  height: 70px;
+  resize: none;
+}

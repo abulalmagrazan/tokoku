@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout::head}"></head>
+<body class="seller-body">
+  <nav th:replace="~{layout::navigation}"></nav>
+  <header th:replace="~{layout::header-seller}"></header>
+  <!-- main -->
+  <main>
+    <div class="dasboard">
+      <div class="etalse">
+        <a href="" class="main-button">add New Product</a>
+        <div class="product" style="margin-top: 40px">
+          <div class="action">
+            <form th:attr="action=@{/product/seller-product(shopId=${shopId})}">
+              <input type="hidden" name="shopId" th:attr="value=${shopId}">
+              <input type="text" name="productName" id="productName" placeholder="Product Name" th:attr="value=${productName}" />
+              <button class="main-button">Search</button>
+            </form>
+          </div>
+          <table>
+            <thead>
+            <tr>
+              <th>product</th>
+              <th>stock</th>
+              <th>price</th>
+              <th>action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${listShopProduct.isEmpty}">
+              <td colspan="4">belum ada product</td>
+            </tr>
+            <tr th:each="data:${listShopProduct}">
+              <td>
+                <div>
+                  <img src="../static/image/logo1-brown.png" alt="" />
+                  <span th:text="${data.productName}"></span>
+                </div>
+              </td>
+              <td th:text="${data.stock}">1</td>
+              <td th:text="${data.price}">Rp.30.000</td>
+              <td>
+                <a href="" class="red-button"><i class="fas fa-trash"></i></a>
+                <a href="" class="warning-button"><i class="fas fa-redo"></i></a>
+                <!-- <a href=""><i class="fas fa-home"></i></a> -->
+              </td>
+            </tr>
+
+            </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="4">
+                <div class="pagination">
+                  <div th:text="|page ${page} of ${totalPage}|"></div>
+                  <div>
+                    <a th:unless="${page<=1}" th:href="@{/product/seller-product(shopId=${shopId},productName=${productName},page=${page-1})}"><i class="fas fa-chevron-circle-left"></i></a>
+                    <a th:unless="${page==totalPage}" th:href="@{/product/seller-product(shopId=${shopId},productName=${productName},page=${page+1})}"><i class="fas fa-chevron-circle-right"></i></a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- end Main -->
+  <footer th:replace="~{layout::footer-seller}"></footer>
+  <script th:replace="~{layout::script}"></script>
+</body>
+</html>

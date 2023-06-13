@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{sign-layout::head}"> </head>
+  <body>
+    <div class="sign-form">
+      <!-- header -->
+      <div th:replace="~{sign-layout::header}"></div>
+      <!-- main -->
+      <div class="main">
+        <div class="wrapper-login">
+          <div class="baner-loginform">
+            <img th:src="@{/resources/image/logo/logo2.png}" alt="" />
+            <img th:src="@{/resources/image/logo/logo1.png}" alt="" />
+          </div>
+          <div class="form">
+            <div class="form-wrapper">
+              <h2>Log In Sellers</h2>
+              <form method="post" th:attr="action=@{/loginProcess}">
+                <input type="hidden" name="role" id="role" th:value="seller">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="field-validation-error" th:if="${param.error !=null}" th:text="${param.error}"></div>
+                <input type="text" name="username" id="username" placeholder="Username" />
+                <input type="password" name="password" id="password" placeholder="Password" />
+                <button type="submit" class="main-button">LOG IN</button>
+                <div class="action">
+                  <a href="">Lupa Password</a>
+                  <a th:href="@{/login/seller-register}">register</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div th:replace="~{sign-layout::footer}"></div>
+    </div>
+  </body>
+</html>

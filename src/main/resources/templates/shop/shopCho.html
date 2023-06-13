@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout::head}"></head>
+  <body>
+    <div class="shop-index">
+      <!-- header -->
+      <div th:replace="~{layout::header-0}"></div>
+      <!-- end header -->
+      <!-- main -->
+      <div class="main">
+        <div class="welcome">
+          <h1>Welcome <span th:text="currentUser"></span></h1>
+        </div>
+        <div class="shop-row">
+          <!-- shop card -->
+          <a th:each="data:${listShop}" th:href="@{/home/seller(shopId=*{data.id})}">
+            <div class="shop-card" >
+              <img th:src="@{/resources/image/logo/logo2.png}" alt="" />
+              <h2 th:text="${data.shopName}">nama toko</h2>
+            </div>
+          </a>
+          <!-- end shop card -->
+          <!-- add shop -->
+          <a th:href="@{/shop/shopUpsert}">
+            <div class="shop-card">
+              <img src="+" alt="" />
+              <h2>tambah toko</h2>
+            </div>
+          </a>
+          <!-- end add shop  -->
+        </div>
+      </div>
+      <!-- end main -->
+    </div>
+  </body>
+</html>
