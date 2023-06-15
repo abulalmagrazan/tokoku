@@ -41,7 +41,17 @@ public class ProductController extends BaseController {
         model.addAttribute("shopList",shopService.shopListByUser(getCurrentUser(),shopId));
         model.addAttribute("sellerBreadCrumb",sellerBreadCrumb);
         return "/product/product-seller";
+    }
 
+    @GetMapping("/product-upsert")
+    public String productUpsert(Model model, @RequestParam(required = false)Long shopId){
+
+        //header
+        SellerBreadCrumb sellerBreadCrumb=new SellerBreadCrumb(sellersService.findSellerName(getCurrentUser()),shopService.findCurrentShop(shopId));
+        model.addAttribute("shopId",shopId);
+        model.addAttribute("shopList",shopService.shopListByUser(getCurrentUser(),shopId));
+        model.addAttribute("sellerBreadCrumb",sellerBreadCrumb);
+        return "/product/product-upsert";
     }
 
 //    @GetMapping("/etalase")

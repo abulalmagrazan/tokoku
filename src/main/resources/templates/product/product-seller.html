@@ -8,7 +8,7 @@
   <main>
     <div class="dasboard">
       <div class="etalse">
-        <a href="" class="main-button">add New Product</a>
+        <a th:href="@{/product/product-upsert(shopId=${shopId})}" class="main-button">add New Product</a>
         <div class="product" style="margin-top: 40px">
           <div class="action">
             <form th:attr="action=@{/product/seller-product(shopId=${shopId})}">

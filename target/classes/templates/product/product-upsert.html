@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout::head}"></head>
+<body class="seller-body">
+<nav th:replace="~{layout::navigation}"></nav>
+<header th:replace="~{layout::header-seller}"></header>
+<!-- main -->
+<main>
+    <div class="dasboard">
+        <form action="" class="upsert-form">
+            <table>
+                <input type="hidden" name="id" />
+                <tbody>
+                <tr>
+                    <td>Product Name</td>
+                    <td>:</td>
+                    <td><input type="text" name="productName" id="productName" placeholder="Product Name" /></td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td>:</td>
+                    <td>
+                        <select name="category" id="category">
+                            <option value="null">--Select Category--</option>
+                            <option value="null">cat1</option>
+                            <option value="null">cat2</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>:</td>
+                    <td><input type="text" name="price" id="price" placeholder="Price" /></td>
+                </tr>
+                <tr>
+                    <td>Stock</td>
+                    <td>:</td>
+                    <td><input type="text" name="stock" id="stock" placeholder="Stoct" /></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>:</td>
+                    <td><textarea name="description" id="description" cols="10" rows="10"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td>:</td>
+                    <td><input type="file" name="" id="" /></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: end; padding-top: 20px">
+                        <button class="main-button">add product</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</main>
+<!-- end Main -->
+<footer th:replace="~{layout::footer-seller}"></footer>
+<script th:replace="~{layout::script}"></script>
+</body>
+</html>
