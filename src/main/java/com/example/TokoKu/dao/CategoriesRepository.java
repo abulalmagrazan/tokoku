@@ -1,6 +1,7 @@
 package com.example.TokoKu.dao;
 
 
+import com.example.TokoKu.dto.DropdownDto;
 import com.example.TokoKu.dto.display.CategoryDisplayDto;
 import com.example.TokoKu.entity.Categories;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,4 +18,10 @@ public interface CategoriesRepository extends JpaRepository<Categories,Long> {
             
             """)
     public List<CategoryDisplayDto>getAll();
+
+    @Query("""
+            SELECT new com.example.TokoKu.dto.DropdownDto(ca.name,ca.id)
+            FROM Categories AS ca
+            """)
+    public List<DropdownDto>categoryDropdown();
 }

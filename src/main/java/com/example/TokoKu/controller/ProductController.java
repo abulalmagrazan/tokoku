@@ -1,9 +1,12 @@
 package com.example.TokoKu.controller;
 
 import com.example.TokoKu.dto.display.SellerBreadCrumb;
+import com.example.TokoKu.dto.upsert.ProductUpsertDto;
+import com.example.TokoKu.service.interfacefile.CategoriesService;
 import com.example.TokoKu.service.interfacefile.ProductsService;
 import com.example.TokoKu.service.interfacefile.SellersService;
 import com.example.TokoKu.service.interfacefile.ShopService;
+import com.example.TokoKu.utility.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,8 @@ public class ProductController extends BaseController {
     @Autowired
     SellersService sellersService;
 
+    @Autowired
+    CategoriesService categoriesService;
 
     @GetMapping("/seller-product")
     public String product(Model model,@RequestParam(required = false) Long shopId,
@@ -46,11 +51,16 @@ public class ProductController extends BaseController {
     @GetMapping("/product-upsert")
     public String productUpsert(Model model, @RequestParam(required = false)Long shopId){
 
+        //data
+        ProductUpsertDto dto =new ProductUpsertDto();
+        Helper.setUpsertViewModel(dto,"Create","Product",model);
+        model.addAttribute("categoryDropdown",categoriesService.categoryDropdown());
         //header
         SellerBreadCrumb sellerBreadCrumb=new SellerBreadCrumb(sellersService.findSellerName(getCurrentUser()),shopService.findCurrentShop(shopId));
         model.addAttribute("shopId",shopId);
         model.addAttribute("shopList",shopService.shopListByUser(getCurrentUser(),shopId));
         model.addAttribute("sellerBreadCrumb",sellerBreadCrumb);
+        //return
         return "/product/product-upsert";
     }
 

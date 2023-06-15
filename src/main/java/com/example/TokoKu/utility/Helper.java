@@ -25,6 +25,7 @@ public class Helper {
         model.addAttribute("type",type+" "+menu);
     }
 
+
     public static String uploadPhoto(String target,String fileName, MultipartFile multipartFile)throws IOException {
         var uploadDirectory="src/main/resources/static/resources/image/"+target;
         var uploadPath= Paths.get(uploadDirectory);
