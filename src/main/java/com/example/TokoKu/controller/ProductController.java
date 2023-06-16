@@ -10,9 +10,11 @@ import com.example.TokoKu.utility.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/product")
@@ -49,11 +51,18 @@ public class ProductController extends BaseController {
     }
 
     @GetMapping("/product-upsert")
-    public String productUpsert(Model model, @RequestParam(required = false)Long shopId){
+    public String productUpsert(Model model, @RequestParam(required = false)Long shopId,
+                                @RequestParam(required = false)Long productId){
 
         //data
         ProductUpsertDto dto =new ProductUpsertDto();
+        dto.setIdShop(shopId);
         Helper.setUpsertViewModel(dto,"Create","Product",model);
+        if(productId!=null){
+           dto=productsService.findByProductId(productId);
+            Helper.setUpsertViewModel(dto,"Update","Product",model);
+        }
+
         model.addAttribute("categoryDropdown",categoriesService.categoryDropdown());
         //header
         SellerBreadCrumb sellerBreadCrumb=new SellerBreadCrumb(sellersService.findSellerName(getCurrentUser()),shopService.findCurrentShop(shopId));
@@ -64,18 +73,33 @@ public class ProductController extends BaseController {
         return "/product/product-upsert";
     }
 
-//    @GetMapping("/etalase")
-//    public String etalase(Model model,
-//                          @RequestParam(defaultValue = "")String productName,
-//                          @RequestParam(defaultValue = "1")Integer page){
-//        model.addAttribute("productName",productName);
-//
-//        model.addAttribute("listProduct",productsService.getBySeller(getCurrentUser(),productName,page));
-//        long totalPage=productsService.getCountPage(getCurrentUser(),productName);
-//        if(totalPage==0){page=0;}
-//        model.addAttribute("totalPage",totalPage);
-//        model.addAttribute("currentPage",page);
-//        model.addAttribute("sellerProfile",shopService.getProfile(getCurrentUser()));
-//        return "product/product-etalase";
-//    }
+
+    @PostMapping("/product-upsert")
+    public String productUpsert(@Valid @ModelAttribute("dto") ProductUpsertDto dto, BindingResult bindingResult,
+                                Model model){
+        if(bindingResult.hasErrors()){
+            Helper.setUpsertViewModel(dto,"Create","Product",model);
+            if(dto.getId()!=null){
+                Helper.setUpsertViewModel(dto,"Update","Product",model);
+            }
+            return "product/product-upsert";
+        }else{
+            MultipartFile multipartFile=dto.getImage();
+            String fileName=(dto.getImagePath()==null || dto.getImagePath().equals(null)?null:dto.getImagePath());
+            try{
+                var imagePath=fileName;
+                if(!multipartFile.isEmpty()){
+                    imagePath=Helper.uploadPhoto("product",fileName,multipartFile);
+                    dto.setImagePath(imagePath);
+                }
+                productsService.add(dto);
+            }catch (Exception e){
+                System.out.println("error upload photo");
+                Helper.setUpsertViewModel(dto,"Create","Product",model);
+                return "/product/product-upsert";
+            }
+        }
+        return "redirect:/product/seller-product?shopId="+dto.getIdShop();
+    }
+
 }

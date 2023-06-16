@@ -11,4 +11,5 @@ public class ProductShopDto {
     private int stock;
     private Double price;
     private String imagePath;
+
 }

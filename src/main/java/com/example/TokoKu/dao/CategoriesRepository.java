@@ -20,7 +20,7 @@ public interface CategoriesRepository extends JpaRepository<Categories,Long> {
     public List<CategoryDisplayDto>getAll();
 
     @Query("""
-            SELECT new com.example.TokoKu.dto.DropdownDto(ca.name,ca.id)
+            SELECT new com.example.TokoKu.dto.DropdownDto(ca.id,ca.name)
             FROM Categories AS ca
             """)
     public List<DropdownDto>categoryDropdown();

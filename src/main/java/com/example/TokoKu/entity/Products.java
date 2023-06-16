@@ -47,7 +47,7 @@ public class Products {
     @JoinColumn(name = "IdShop",insertable = false,updatable = false)
     private Shop shop;
 
-    public Products(Long id, String name, Long idShop, Long idCategory, String description, Double price, Integer stock) {
+    public Products(Long id, String name, Long idShop, Long idCategory, String description, Double price, Integer stock,String image) {
         this.id = id;
         this.name = name;
         this.idShop = idShop;
@@ -55,5 +55,6 @@ public class Products {
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.image=image;
     }
 }

@@ -7,12 +7,12 @@
 <!-- main -->
 <main>
     <div class="dasboard">
-        <form method="POST" enctype="multipart/form-data" class="upsert-form" th:attr="action=@{/product/product-upsert}">
+        <form method="POST" enctype="multipart/form-data" class="upsert-form" th:attr="action=@{/product/product-upsert}" th:object="${dto}">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <table>
-                <input type="hidden" name="id" th:field="${dto.id}"/>
-                <input type="hidden" name="idShop" th:field="${dto.idShop}">
-                <input type="hidden" name="imagePath" th:field="${dto.imagePath}">
+                <input type="hidden" name="id" th:field="*{id}"/>
+                <input type="hidden" name="idShop" th:field="*{idShop}">
+                <input type="hidden" name="imagePath" th:field="*{imagePath}">
                 <tbody>
                 <tr>
                     <td>Product Name</td>
@@ -23,32 +23,37 @@
                     <td>Category</td>
                     <td>:</td>
                     <td>
-                        <select name="category" id="category">
+                        <select name="category" id="category" th:field="*{idCategory}">
                             <option value="null">--Select Category--</option>
-                            <option value="null">cat1</option>
-                            <option value="null">cat2</option>
+                            <option th:each="option:${categoryDropdown}" th:value="${option.stringValue}"
+                                    th:text="${option.text}" th:selected="${option.stringValue==idCategory}">cat1</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>Price</td>
                     <td>:</td>
-                    <td><input type="text" name="price" id="price" placeholder="Price" th:field="${dto.price}"/></td>
+                    <td><input type="text" name="price" id="price" placeholder="Price" th:field="*{price}"/></td>
                 </tr>
                 <tr>
                     <td>Stock</td>
                     <td>:</td>
-                    <td><input type="text" name="stock" id="stock" placeholder="Stock" th:field="${dto.stock}"/></td>
+                    <td><input type="text" name="stock" id="stock" placeholder="Stock" th:field="*{stock}"/></td>
                 </tr>
                 <tr>
                     <td>Description</td>
                     <td>:</td>
-                    <td><textarea name="description" id="description" cols="10" rows="10" th:field="${dto.description}"></textarea></td>
+                    <td><textarea name="description" id="description" cols="10" rows="10" th:field="*{description}"></textarea></td>
                 </tr>
                 <tr>
                     <td>Image</td>
                     <td>:</td>
-                    <td><input type="file" name="" id="" th:field="${dto.image}"/></td>
+                    <td><input type="file" name="" id="input" th:field="*{image}"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><img th:src="@{/resources/image/product/{path}(path=*{imagePath})}" id="img" height="200" alt=""></td>
                 </tr>
                 <tr>
                     <td colspan="3" style="text-align: end; padding-top: 20px">
@@ -63,5 +68,14 @@
 <!-- end Main -->
 <footer th:replace="~{layout::footer-seller}"></footer>
 <script th:replace="~{layout::script}"></script>
+<script>
+    let img=document.getElementById("img");
+    let input=document.getElementById("input");
+
+    input.onchange=(e)=>{
+        if(input.files[0])
+        img.src=URL.createObjectURL(input.files[0]);
+    };
+</script>
 </body>
 </html>

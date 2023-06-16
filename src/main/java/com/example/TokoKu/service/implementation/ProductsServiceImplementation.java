@@ -4,6 +4,8 @@ import com.example.TokoKu.dao.ProductsRepository;
 import com.example.TokoKu.dto.display.EtalaseProductDto;
 import com.example.TokoKu.dto.display.ProductIndexDisplayDto;
 import com.example.TokoKu.dto.display.ProductShopDto;
+import com.example.TokoKu.dto.upsert.ProductUpsertDto;
+import com.example.TokoKu.entity.Products;
 import com.example.TokoKu.service.interfacefile.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -53,5 +55,16 @@ public class ProductsServiceImplementation implements ProductsService {
     public List<ProductShopDto> getShopProduct(Long ShopId,String productName,Integer page) {
         Pageable pagination=PageRequest.of(page-1,rowPage,Sort.by("id"));
         return productsRepository.getShopProduct(ShopId,productName,pagination);
+    }
+
+    @Override
+    public void add(ProductUpsertDto dto) {
+        Products entity=new Products(dto.getId(),dto.getName(),dto.getIdShop(), Long.parseLong(dto.getIdCategory()),dto.getDescription(),dto.getPrice(),dto.getStock(),dto.getImagePath());
+        productsRepository.save(entity);
+    }
+
+    @Override
+    public ProductUpsertDto findByProductId(Long productId) {
+        return productsRepository.findByProductId(productId);
     }
 }

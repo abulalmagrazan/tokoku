@@ -33,7 +33,7 @@
             <tr th:each="data:${listShopProduct}">
               <td>
                 <div>
-                  <img src="../static/image/logo1-brown.png" alt="" />
+                  <img th:src="@{/resources/image/product/{path}(path=${data.imagePath})}" alt="" />
                   <span th:text="${data.productName}"></span>
                 </div>
               </td>
@@ -41,7 +41,7 @@
               <td th:text="${data.price}">Rp.30.000</td>
               <td>
                 <a href="" class="red-button"><i class="fas fa-trash"></i></a>
-                <a href="" class="warning-button"><i class="fas fa-redo"></i></a>
+                <a th:href="@{/product/product-upsert(shopId=${shopId},productId=${data.idProduct})}"  class="warning-button"><i class="fas fa-redo"></i></a>
                 <!-- <a href=""><i class="fas fa-home"></i></a> -->
               </td>
             </tr>

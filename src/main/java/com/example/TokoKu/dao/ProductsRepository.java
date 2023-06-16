@@ -4,6 +4,7 @@ package com.example.TokoKu.dao;
 import com.example.TokoKu.dto.display.EtalaseProductDto;
 import com.example.TokoKu.dto.display.ProductIndexDisplayDto;
 import com.example.TokoKu.dto.display.ProductShopDto;
+import com.example.TokoKu.dto.upsert.ProductUpsertDto;
 import com.example.TokoKu.entity.Products;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -56,4 +57,11 @@ public interface ProductsRepository extends JpaRepository<Products,Long> {
             """)
     public List<ProductShopDto> getShopProduct(@Param("shopId")Long shopId, @Param("productName")String productName,Pageable pagination);
 
+
+    @Query("""
+            SELECT new com.example.TokoKu.dto.upsert.ProductUpsertDto(pr.id,pr.name,pr.idShop,pr.idCategory,pr.description,pr.price,pr.stock,pr.image)
+            FROM Products AS pr
+            WHERE pr.id=:productId
+            """)
+    public ProductUpsertDto findByProductId(@Param("productId")Long productId);
 }

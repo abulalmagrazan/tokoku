@@ -34,12 +34,11 @@ public class ShopController extends BaseController {
     @GetMapping("shopUpsert")
     public String shopUpsert(Model model, @RequestParam(required = false)Long shopId){
         ShopUpsertDto dto=new ShopUpsertDto();
+        Helper.setUpsertViewModel(dto,"Create","Shop",model);
         if(shopId!=null){
             dto=shopService.findShopById(shopId);
             Helper.setUpsertViewModel(dto,"Edit","Shop",model);
-            return "shop/shopUpsert";
         }
-        Helper.setUpsertViewModel(dto,"Create","Shop",model);
         return "shop/shopUpsert";
     }
 
@@ -47,6 +46,9 @@ public class ShopController extends BaseController {
     public String shopUpsert(@Valid @ModelAttribute("dto") ShopUpsertDto dto, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             Helper.setUpsertViewModel(dto,"Create","Shop",model);
+            if (dto.getId() != null) {
+                Helper.setUpsertViewModel(dto,"Edit","Shop",model);
+            }
             return "shop/shopUpsert";
         }else{
             MultipartFile multipartFile=dto.getImage();
@@ -56,18 +58,16 @@ public class ShopController extends BaseController {
                 if(!multipartFile.isEmpty()){
                     imagePath=Helper.uploadPhoto("shop",fileName,multipartFile);
                 }
-
                 Long sellerId=sellersService.findSellerId(getCurrentUser());
                 dto.setImagePath(imagePath);
                 shopService.add(dto,sellerId);
             }catch (Exception e){
-                System.out.println(e);
+                System.out.println("Error Upload Photo");
                 Helper.setUpsertViewModel(dto,"Create","Shop",model);
                 return "shop/shopUpsert";
-
             }
         }
-        return "redirect:/home/seller?shopName="+dto.getShopName();
+        return "redirect:/home/seller?shopId="+dto.getId();
     }
 
     @GetMapping("profile")
