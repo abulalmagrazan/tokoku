@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout-customer::head}"></head>
+<body class="main-body">
+<!-- navbar -->
+<div th:replace="~{layout-customer::navbar}"></div>
+<!-- end Navbar -->
+<!-- main -->
+<div class="main">
+  <div class="shop-detail">
+    <div class="shop">
+      <div class="shop-image">
+        <img th:src="@{/resources/image/shop/{path}(path=${shopDetail.image})}" alt="" />
+      </div>
+      <div class="shop-name">
+        <div class="name">
+          <span th:text="${shopDetail.name}">shop name</span>
+        </div>
+        <!-- <div class="status">
+              <span>online</span>
+            </div> -->
+        <div class="button">
+          <a href="" class="main-button">chat seller</a>
+          <!-- <a href="" class="main-button">Kunjungi Toko</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product">
+    <div class="product-wrapper">
+      <div class="card product">
+        <div class="card-product" th:each="product:${productList}">
+          <a th:href="@{/product/product-detail(productId=${product.id})}">
+            <div class="image">
+              <img  th:src="@{/resources/image/product/{path}(path=${product.image})}" alt="" />
+            </div>
+            <span th:text="${product.name}">Nama Product nya panjang banget sampai kempanghajnag</span>
+            <div class="detail">
+              <span th:text="${product.price}">Rp.1000</span>
+              <span></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="pagination">
+      <div>
+        <p>1/10</p>
+      </div>
+      <div>
+        <a href="" class="fas fa-angle-left"></a>
+        <a href="" class="fas fa-angle-right"></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end main -->
+<div th:replace="~{layout-customer::footer}"></div>
+</body>
+</html>

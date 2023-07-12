@@ -8,6 +8,7 @@ import lombok.*;
 public class LoginAccessDto {
     private String username;
     private String password;
+    private Long idUser;
     private String AccountRole;
     private String loginPageRole;
 }

@@ -14,6 +14,7 @@ public class AppUserDetail implements UserDetails {
 
     private String username;
     public String password;
+    public Long idUser;
     public String role;
     public String loginPage;
     public List<GrantedAuthority> authorities=new ArrayList<>();
@@ -21,6 +22,7 @@ public class AppUserDetail implements UserDetails {
     public AppUserDetail(LoginAccessDto acc){
         this.username=acc.getUsername();
         this.password=acc.getPassword();
+        this.idUser=acc.getIdUser();
         this.role=acc.getAccountRole();
         this.loginPage=acc.getLoginPageRole();
         this.authorities.add(new SimpleGrantedAuthority(acc.getAccountRole()));
@@ -37,6 +39,8 @@ public class AppUserDetail implements UserDetails {
     public String getLoginPage(){return  this.loginPage;}
     @Override
     public String getPassword() {return this.password;}
+
+    public Long getIdUser(){return this.idUser;}
 
     @Override
     public String getUsername() {

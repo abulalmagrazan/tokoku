@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout-customer::head}"></head>
+<body class="main-body">
+<!-- navbar -->
+<div th:replace="~{layout-customer::navbar}"></div>
+<!-- end Navbar -->
+<!-- main -->
+<div class="main">
+  <div class="product-detail">
+    <div class="product-image">
+      <img th:src="@{/resources/image/product/{path}(path=${productDetail.image})}" alt="" />
+    </div>
+    <div class="detail">
+      <div class="product-name">
+        <span th:text="${productDetail.productName}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore eligendi rem nam distinctio doloribus cum dolores odit impedit! Adipisci, ab nihil! Doloremque aut nulla eaque reiciendis eius pariatur sint dolorem.</span>
+      </div>
+      <div class="product-status">
+        <div class="rating">
+          <span>5</span>
+          <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+        <div class="judgment">
+          <span>2RB+</span>
+          <span>Penilaian</span>
+        </div>
+        <div class="selling">
+          <span>2RB+</span>
+          <span>Terjual</span>
+        </div>
+      </div>
+      <div class="price">
+        <span>Rp.7500</span>
+      </div>
+      <div class="action">
+
+        <div class="quantity">
+          <span>kuantiti</span>
+          <input type="number" name="quantity" id="quantity" min="1" value="1" />
+          <span>100 buah</span>
+        </div>
+        <div class="button">
+          <a th:href="@{/transaction/addCart(idProduct=${productDetail.id})}"  class="main-button" onclick="addCart()" id="addCart"><i class="fas fa-shopping-cart">Masukkan Keranjang</i></a>
+          <a href="" class="main-button">Beli sekarang</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shop-detail">
+    <div class="shop">
+      <div class="shop-image">
+        <img th:src="@{/resources/image/shop/{path}(path=${productDetail.imageShop})}" alt="" />
+      </div>
+      <div class="shop-name">
+        <div class="name">
+          <span th:text="${productDetail.shopName}">shop name</span>
+        </div>
+        <!-- <div class="status">
+          <span>online</span>
+        </div> -->
+        <div class="button">
+          <a href="" class="main-button">chat seller</a>
+          <a th:href="@{/shop/shop-detail(shopId=${productDetail.idShop})}" class="main-button">Kunjungi Toko</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="product-description">
+    <div class="title">
+      <span>Description Product</span>
+    </div>
+    <div class="description">
+      <p th:utext="${productDetail.description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nulla consectetur optio quia fugit non, molestiae nisi vitae voluptatibus reiciendis?</p>
+    </div>
+  </div>
+</div>
+<!-- end main -->
+<div th:replace="~{layout-customer::footer}"></div>
+<script>
+
+  function addCart(){
+  const quantity = document.querySelector("#quantity").value;
+  const button= document.querySelector("#addCart");
+  button.href=button.href +`&quantity=${quantity}`
+  }
+</script>
+</body>
+</html>

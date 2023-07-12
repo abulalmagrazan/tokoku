@@ -23,8 +23,17 @@ public class Account {
     @Column(name="Role")
     private String role;
 
+    @Column(name = "IsActive")
+    private boolean isActive;
+
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Account(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 }

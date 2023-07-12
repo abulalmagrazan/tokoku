@@ -4,6 +4,7 @@ package com.example.TokoKu.service.interfacefile;
 import com.example.TokoKu.dto.ListIdValueDto;
 import com.example.TokoKu.dto.display.ProfileDisplayDto;
 import com.example.TokoKu.dto.display.ShopBySellerDto;
+import com.example.TokoKu.dto.display.ShopDetail;
 import com.example.TokoKu.dto.display.ShopProfileDto;
 import com.example.TokoKu.dto.upsert.ShopUpsertDto;
 
@@ -23,4 +24,6 @@ public interface ShopService {
     public ShopUpsertDto findShopById(Long shopId);
 
     public ShopProfileDto findShopProfile(Long shopId, String username);
+
+    public ShopDetail getShop(Long shopId);
 }

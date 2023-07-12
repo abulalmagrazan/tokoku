@@ -22,7 +22,12 @@ public class CustomersServiceImplementation implements CustomersService {
 
     @Override
     public void add(RegisterAccountDto dto) {
-        Customers entity=new Customers(null,dto.getUsername(), encoder.encode(dto.getPassword()),dto.getFirstName(), dto.getLastName(), dto.getBirthDate(),dto.getGender(),dto.getPhone(), LocalDate.now());
+        Customers entity=new Customers(null,dto.getUsername(), encoder.encode(dto.getPassword()),dto.getFirstName(), dto.getLastName(), dto.getBirthDate(),dto.getGender(),dto.getPhone(),dto.getEmail(), LocalDate.now());
         repository.save(entity);
+    }
+
+    @Override
+    public Long findCustomerId(String username) {
+        return repository.findCustomerId(username);
     }
 }

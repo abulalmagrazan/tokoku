@@ -15,15 +15,17 @@ import java.util.UUID;
 
 public class Helper {
 
-    public static String formatCurrency(Double value){
-        Locale indo=new Locale("id","ID");
-        return NumberFormat.getCurrencyInstance(indo).format(value);
-    }
+
 
     public static void setUpsertViewModel(Object dto, String type,String menu, Model model){
         model.addAttribute("dto",dto);
         model.addAttribute("type",type+" "+menu);
     }
+    public static void setRegisterViewModel(Object dto, String title, Model model){
+        model.addAttribute("dto",dto);
+        model.addAttribute("title","Create New "+title);
+    }
+
 
 
     public static String uploadPhoto(String target,String fileName, MultipartFile multipartFile)throws IOException {

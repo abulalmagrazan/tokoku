@@ -39,6 +39,10 @@ public class Customers {
     @Column(name = "Phone")
     public String phone;
 
+    @Column(name = "Email")
+    public String email;
+
+
     @Column(name = "RegisterDate")
     public LocalDate registerDate;
 

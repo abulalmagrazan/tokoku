@@ -37,14 +37,18 @@ public class AppUserDetailService implements UserDetailsService {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         var role = request.getParameter("role");
+        Long idUser=null;
         Account userLogin= accRepo.findById(username).orElseThrow(()->new RuntimeException("Username "+username+" not Found"));
-
-        LoginAccessDto accessDto= new LoginAccessDto (userLogin.getUsername(),userLogin.getPassword(),userLogin.getRole(),role);
-
-
-            return new AppUserDetail(accessDto);
-
-
+        if(role!=null){
+            if(role.toLowerCase().equals("customer")){
+                idUser=cusRepo.findCustomerId(userLogin.getUsername());
+            }
+            if(role.toLowerCase().equals("seller")){
+                idUser=selRepo.findSellerId(userLogin.getUsername());
+            }
+        }
+        LoginAccessDto accessDto= new LoginAccessDto (userLogin.getUsername(),userLogin.getPassword(),idUser,userLogin.getRole(),role);
+        return new AppUserDetail(accessDto);
     }
 
 

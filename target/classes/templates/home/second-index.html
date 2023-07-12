@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout-customer::head}"></head>
+<body class="main-body">
+<!--navbar-->
+<div th:replace="~{layout-customer::navbar}"></div>
+<!--end navbar-->
+<!-- main -->
+<div class="main">
+    <div class="category">
+        <div class="category-wrapper">
+            <h2>Category</h2>
+            <div class="card category">
+                <!-- card -->
+                <div class="card-category" th:each="category:${listCategory}">
+                    <a href="">
+                        <img th:src="@{/resources/image/logo/logo1.png}" alt="" />
+                        <span th:text="${category.name}">category name kalo lebih panjang</span>
+                    </a>
+                </div>
+                <!-- end card -->
+            </div>
+        </div>
+    </div>
+    <div class="product">
+        <div class="product-wrapper">
+            <h2>Product</h2>
+            <div class="card product">
+                <div class="card-product" th:each="product:${listProduct}">
+                    <a th:href="@{/product/product-detail(productId=${product.id})}">
+                        <div class="image">
+                            <img  th:src="@{/resources/image/product/{path}(path=${product.image})}" alt="" />
+                        </div>
+                        <span th:text="${product.name}">Nama Product nya panjang banget sampai kempanghajnag</span>
+                        <div class="detail">
+                            <span th:text="${product.price}">Rp.1000</span>
+                            <span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="button">
+                <button class="main-button">Muat Lebih Banyak</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end main -->
+<div th:replace="~{layout-customer::footer}"></div>
+</body>
+</html>

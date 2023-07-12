@@ -36,14 +36,14 @@ public class HomeController extends BaseController {
     @GetMapping("/index")
     public String index(){
         getCurrentUser();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(getCurrentRole().toLowerCase(Locale.ROOT).equals("administrator")){
             return "redirect:/home/indexAdmin";
         }else if(getCurrentRole().toLowerCase(Locale.ROOT).equals("seller")){
+
             return "redirect:/home/seller";
-        }else if(getCurrentRole().toLowerCase(Locale.ROOT).equals("customer")){
-            return "redirect:/home/indexCustomer";
         }else{
+
             return "redirect:/home/indexGuest";
         }
     }
@@ -59,7 +59,7 @@ public class HomeController extends BaseController {
     public String indexGuest(Model model){
         model.addAttribute("listCategory",categoriesService.getAll());
         model.addAttribute("listProduct",productsService.getAll());
-        return "home/home-index";
+        return "home/second-index";
     }
 
     @GetMapping("/seller")

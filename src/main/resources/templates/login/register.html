@@ -8,7 +8,8 @@
       <!-- main -->
       <div class="main">
         <div class="register-form">
-          <form method="POST" enctype="multipart/form-data" th:attr="action=@{/login/seller-register}">
+          <span th:text="${title}">Register New Account</span>
+          <form method="POST" enctype="multipart/form-data" th:attr="action=@{/login/register}">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="wrapper-register">
               <div class="account">
@@ -18,7 +19,8 @@
                 <div class="field-validation-error" th:errors="${dto.password}"></div>
                 <input type="password" name="retype" id="retype" placeholder="Confirm Password" th:field="${dto.retypePassword}"/>
                 <div class="field-validation-error" th:errors="${dto}"></div>
-<!--                <input type="email" name="email" id="email" placeholder="Email" />-->
+                <input type="email" name="email" id="email" placeholder="Email" th:field="${dto.email}"/>
+                <div class="field-validation-error" th:errors="${dto.email}"></div>
               </div>
               <div class="profile">
                 <div class="name">
@@ -33,7 +35,7 @@
                   <div class="field-validation-error" th:errors="${dto.birthDate}"></div>
                 </div>
                 <div class="gender">
-                  <span>Gender</span>
+                  <p>Gender</p>
                   <div class="radio-row">
                     <div>
                       <input type="radio" name="gender" id="male" th:value="male" th:checked="${dto.gender=='male'}"  />
@@ -51,7 +53,7 @@
               </div>
             </div>
             <div class="action">
-              <button type="submit" class="main-button">Daftar Seller</button>
+              <button type="submit" class="main-button">Create New Account</button>
             </div>
           </form>
         </div>

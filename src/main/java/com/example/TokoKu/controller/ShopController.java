@@ -2,6 +2,7 @@ package com.example.TokoKu.controller;
 
 import com.example.TokoKu.dto.display.SellerBreadCrumb;
 import com.example.TokoKu.dto.upsert.ShopUpsertDto;
+import com.example.TokoKu.service.interfacefile.ProductsService;
 import com.example.TokoKu.service.interfacefile.SellersService;
 import com.example.TokoKu.service.interfacefile.ShopService;
 import com.example.TokoKu.utility.Helper;
@@ -24,22 +25,33 @@ public class ShopController extends BaseController {
 
     @Autowired
     SellersService sellersService;
+
+    @Autowired
+    ProductsService productsService;
+
+
     @GetMapping("/index")
     public String shopCho(Model model){
-        model.addAttribute("currentSeller",getCurrentUser());
-        model.addAttribute("listShop",shopService.shopBySeller(getCurrentUser()));
-        return "shop/shopCho";
+        if(isAccess("shop","index")) {
+            model.addAttribute("currentSeller", getCurrentUser());
+            model.addAttribute("listShop", shopService.shopBySeller(getCurrentUser()));
+            return "shop/shopCho";
+        }
+        return "redirect:/access-denied";
     }
 
     @GetMapping("shopUpsert")
     public String shopUpsert(Model model, @RequestParam(required = false)Long shopId){
-        ShopUpsertDto dto=new ShopUpsertDto();
-        Helper.setUpsertViewModel(dto,"Create","Shop",model);
-        if(shopId!=null){
-            dto=shopService.findShopById(shopId);
-            Helper.setUpsertViewModel(dto,"Edit","Shop",model);
+        if(isAccess("shop","upsert")) {
+            ShopUpsertDto dto = new ShopUpsertDto();
+            Helper.setUpsertViewModel(dto, "Create", "Shop", model);
+            if (shopId != null) {
+                dto = shopService.findShopById(shopId);
+                Helper.setUpsertViewModel(dto, "Edit", "Shop", model);
+            }
+            return "shop/shopUpsert";
         }
-        return "shop/shopUpsert";
+        return "redirect:/access-denied";
     }
 
     @PostMapping("shopUpsert")
@@ -72,12 +84,22 @@ public class ShopController extends BaseController {
 
     @GetMapping("profile")
     public String shopProfile(Model model,@RequestParam(required = false)Long shopId){
-        SellerBreadCrumb sellerBreadCrumb=new SellerBreadCrumb(sellersService.findSellerName(getCurrentUser()),shopService.findCurrentShop(shopId));
-        model.addAttribute("currentUser",getCurrentUser());
-        model.addAttribute("dto",shopService.findShopProfile(shopId,getCurrentUser()));
-        model.addAttribute("shopId",shopId);
-        model.addAttribute("shopList",shopService.shopListByUser(getCurrentUser(),shopId));
-        model.addAttribute("sellerBreadCrumb",sellerBreadCrumb);
-        return "shop/shop-profile";
+        if(isAccess("shop","profile")) {
+            SellerBreadCrumb sellerBreadCrumb = new SellerBreadCrumb(sellersService.findSellerName(getCurrentUser()), shopService.findCurrentShop(shopId));
+            model.addAttribute("currentUser", getCurrentUser());
+            model.addAttribute("dto", shopService.findShopProfile(shopId, getCurrentUser()));
+            model.addAttribute("shopId", shopId);
+            model.addAttribute("shopList", shopService.shopListByUser(getCurrentUser(), shopId));
+            model.addAttribute("sellerBreadCrumb", sellerBreadCrumb);
+            return "shop/shop-profile";
+        }
+        return "redirect:/access-denied";
+    }
+
+    @GetMapping("/shop-detail")
+    public String shopDetail(Model model,@RequestParam Long shopId){
+        model.addAttribute("shopDetail",shopService.getShop(shopId));
+        model.addAttribute("productList",productsService.getByShopId(shopId));
+        return "/shop/shop-detail";
     }
 }

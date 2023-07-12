@@ -24,7 +24,7 @@ public class SellersServiceImplementation implements SellersService {
 
     @Override
     public void add(RegisterAccountDto dto) {
-        Sellers entity=new Sellers(null,dto.getUsername(), encoder.encode(dto.getPassword()),dto.getFirstName(), dto.getLastName(), dto.getBirthDate(),dto.getGender(),dto.getPhone(), LocalDate.now());
+        Sellers entity=new Sellers(null,dto.getUsername(), encoder.encode(dto.getPassword()),dto.getFirstName(), dto.getLastName(), dto.getBirthDate(),dto.getGender(),dto.getPhone(),dto.getEmail(), LocalDate.now());
         repository.save(entity);
     }
 

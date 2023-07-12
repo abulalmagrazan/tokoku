@@ -24,9 +24,10 @@ public class SecurityConfiguration {
 
 
     @Bean
+    @Order(2)
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         http.authorizeRequests()
-                .antMatchers("/resources/**","/login/**","/","/home/indexGuest").permitAll()
+                .antMatchers("/resources/**","/login/**","/","/home/indexGuest","/product/**","/shop/**","/swagger-ui/**").permitAll()
                 .antMatchers().hasAnyAuthority("Administrator","Customer","Seller")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login/loginForm")

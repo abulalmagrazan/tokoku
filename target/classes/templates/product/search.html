@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout-customer::head}"></head>
+<body class="main-body">
+<!-- navbar -->
+<div th:replace="~{layout-customer::navbar}"></div>
+<!-- end Navbar -->
+<!-- main -->
+<div class="main grid">
+    <div class="filter-panel">
+        <span>Filter</span>
+        <form th:attr="action=@{/product/search}">
+            <input type="hidden" name="name" id="name" th:attr="value=${name}">
+        <div class="panel price">
+            <span>Batas Harga</span>
+            <div class="action">
+                <input type="text" name="minPrice" id="minPrice" placeholder="Rp Min" th:attr="value=${minPrice}"/>
+                <input type="text" name="maxPrice" id="maxPrice" placeholder="Rp Max" th:attr="value=${maxPrice}"/>
+            </div>
+            <button type="submit" class="main-button">Terapkan</button>
+        </div>
+        </form>
+    </div>
+    <div class="product">
+        <div class="product-wrapper">
+            <!-- <h2>Product</h2> -->
+            <div class="card product">
+                <div class="card-product" th:each="product:${listProduct}">
+                    <a th:href="@{/product/product-detail(productId=${product.id})}">
+                        <div class="image">
+                            <img  th:src="@{/resources/image/product/{path}(path=${product.image})}" alt="" />
+                        </div>
+                        <span th:text="${product.name}">Nama Product nya panjang banget sampai kempanghajnag</span>
+                        <div class="detail">
+                            <span th:text="${product.price}">Rp.1000</span>
+                            <span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="pagination-2">
+                <div>
+                    <a href="" ><i class="fas fa-angle-left"></i></a>
+                    <a href="">before</a>
+                    <a href="">current</a>
+                    <a href="">next</a>
+                    <a href="" > <i class="fas fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end main -->
+<div th:replace="~{layout-customer::footer}"></div>
+</body>
+</html>

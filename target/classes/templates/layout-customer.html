@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head">
+    <meta charset="UTF-8" />
+    <meta id="idCustomer" th:value="${idCustomer}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}" />
+    <link rel="icon" type="image/ico" th:href="@{/resources/image/favicon.ico}" />
+    <title>TokoKu</title>
+  </head>
+  <body>
+    <!--    Customer  -->
+    <!-- navbar -->
+    <div class="navbar" th:fragment="navbar">
+      <div class="company-logo">
+        <a th:href="@{/}">
+          <img th:src="@{/resources/image/logo/logo1.png}" alt="" />
+        </a>
+      </div>
+      <div class="search">
+        <form method="get" th:attr="action=@{/product/search}">
+          <!--      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+          <input type="text" name="name" id="name" placeholder="Search..." th:attr="value=${name}" />
+          <button><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <div class="action">
+        <!-- <div class="panel">
+      <i class="fas fa-heart"></i>
+      <span class="amount">10</span>
+    </div> -->
+        <div class="panel">
+          <a th:href="@{/transaction/cart}"> <i class="fas fa-shopping-cart"></i></a>
+          <!-- <span class="amount">1</span> -->
+        </div>
+        <div class="account">
+          <img th:src="@{/resources/image/OIP.jpg}" alt="" />
+          <div class="dropdown-account">
+            <a href="" th:if="${#authentication.name==anonymousUser}" th:text="${#authentication.name}">user</a>
+            <a th:href="@{/login/loginForm}" th:if="${#authentication.name!=anonymousUser}">Login</a>
+            <form th:if="${#authentication.name==anonymousUser}" th:attr="action=@{/logout}" method="POST">
+              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+              <button class="logout-button">log out</button>
+            </form>
+            <a th:href="@{/login/register}" th:if="${#authentication.name!=anonymousUser}">Register</a>
+            <a href="#" th:if="${#authentication.name==anonymousUser}">Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end Navbar -->
+    <!--    footer-->
+    <div class="footer" th:fragment="footer">
+      <p>&copy; 2023 Tokoku. All rights reserved. | <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
+      <p>Designed and developed by <a href="https://www.yourwebsite.com" target="_blank">Almagrazan</a></p>
+    </div>
+    <!--    end footer-->
+    <!--    End Customer  -->
+  </body>
+</html>

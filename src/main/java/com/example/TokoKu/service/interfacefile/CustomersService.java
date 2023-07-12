@@ -5,4 +5,5 @@ import com.example.TokoKu.dto.upsert.RegisterAccountDto;
 
 public interface CustomersService {
     public void add(RegisterAccountDto dto);
+    public Long findCustomerId(String username);
 }

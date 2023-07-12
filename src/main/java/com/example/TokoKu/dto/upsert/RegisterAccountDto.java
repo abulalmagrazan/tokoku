@@ -41,6 +41,9 @@ public class RegisterAccountDto {
     @NotBlank(message = "jangan kosong")
     private String phone;
 
+    @NotBlank(message = "Email harus diisi")
+    private String email;
+
 //    @NotBlank(message = "Role harus di isi")
     public String role;
 }

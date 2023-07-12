@@ -22,7 +22,12 @@ public class GlobalConfiguration {
                new MenuAccessDto("Home","home","indexCustomer")
         )));
         datasetMenuAccess.put("Seller",new LinkedList<>(Arrays.asList(
-               new MenuAccessDto("Home","home","seller")
+               new MenuAccessDto("Home","home","seller"),
+                new MenuAccessDto("Product","product","seller"),
+                new MenuAccessDto("Product","product","upsert"),
+                new MenuAccessDto("Shop","shop","index"),
+                new MenuAccessDto("Shop","shop","upsert"),
+                new MenuAccessDto("Shop","shop","profile")
         )));
 
         return datasetMenuAccess;

@@ -3,6 +3,7 @@ package com.example.TokoKu.dao;
 import com.example.TokoKu.dto.ListIdValueDto;
 import com.example.TokoKu.dto.display.ProfileDisplayDto;
 import com.example.TokoKu.dto.display.ShopBySellerDto;
+import com.example.TokoKu.dto.display.ShopDetail;
 import com.example.TokoKu.dto.display.ShopProfileDto;
 import com.example.TokoKu.dto.upsert.ShopUpsertDto;
 import com.example.TokoKu.entity.Shop;
@@ -68,4 +69,11 @@ public interface ShopRepository extends JpaRepository<Shop,Long> {
             WHERE sh.id=:shopId AND se.username=:username
             """)
     public ShopProfileDto findShopProfile(@Param("shopId") Long shopId,@Param("username") String username);
+
+    @Query("""
+            SELECT new com.example.TokoKu.dto.display.ShopDetail(sh.id,sh.shopName,sh.imagePath)
+            FROM Shop AS sh
+            WHERE sh.id=:shopId
+            """)
+    public ShopDetail getShop(@Param("shopId")Long shopId);
 }

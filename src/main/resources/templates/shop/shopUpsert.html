@@ -32,8 +32,11 @@
                     <input type="text" name="city" id="city" placeholder="City" th:field="${dto.city}"/>
                 </div>
                 <div>
-                    <label for="imagePath" >image</label>
-                    <input type="file" name="imagePath" id="imagePath" th:field="${dto.image}"/>
+                    <label for="input" >image</label>
+                    <input type="file" name="imagePath" id="input" th:field="${dto.image}"/>
+                </div>
+                <div>
+                    <img th:src="@{/resources/image/shop/{path}(path=${dto.imagePath})}" id="img" height="200" alt="">
                 </div>
                 <button class="white-button" th:text="${type}">create New Shop</button>
             </form>
@@ -41,5 +44,14 @@
     </div>
     <!-- end main -->
 </div>
+<script>
+    let img=document.getElementById("img");
+    let image=document.getElementById("input");
+
+    input.onchange=(e)=>{
+        if(image.files[0])
+        img.src=URL.createObjectURL(image.files[0]);
+    };
+</script>
 </body>
 </html>

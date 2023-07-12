@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/resources/css/style.css}" />
       <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
       <link rel="icon" type="image/ico" th:href="@{/resources/image/favicon.ico}">
+      <meta th:id="idCustomer" th:content="${idCustomer}">
     <title>TokoKu</title>
   </head>
   <body>
@@ -71,7 +72,10 @@
                 </div>
             </div>
             <div class="logout">
-                <a href="">logout</a>
+                <form th:attr="action=@{/logout}" method="POST">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button class="main-button">log out <i class="fas fa-sign-out-alt"></i></button>
+                </form>
             </div>
         </div>
     </header>

@@ -6,11 +6,15 @@ import com.example.TokoKu.dto.MenuAccessDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.security.Principal;
 import java.util.Locale;
 
 public class BaseController {
     private String currentUser;
     private String currentRole;
+
+    private Long currentId;
+
     private boolean access;
 
     public String getCurrentUser(){
@@ -28,6 +32,12 @@ public class BaseController {
         var principal=(AppUserDetail)auth.getPrincipal();
         String role=String.valueOf(principal.getRole());
         return role;
+    }
+
+    public Long getCurrentId(){
+        Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+        var principal=(AppUserDetail)auth.getPrincipal();
+        return principal.getIdUser();
     }
 
     public boolean isAccess(String controller, String action) {

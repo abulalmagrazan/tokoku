@@ -9,5 +9,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry){
         registry.addViewController("/").setViewName("forward:/home/index");
+        registry.addViewController("/access-denied").setViewName("forward:/login/access-denied");
+        registry.addViewController("/login/customer").setViewName("forward:/login/loginForm");
     }
 }

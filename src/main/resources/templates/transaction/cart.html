@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout-customer::head}"></head>
+  <body class="main-body">
+    <!--navbar-->
+    <div th:replace="~{layout-customer::navbar}"></div>
+    <!--end navbar-->
+    <!-- main -->
+    <div class="main">
+      <!--    <div class="cart-page">-->
+      <!--        <form action="">-->
+      <!--            <div class="checkout">-->
+      <!--                <span>Rp.000,00</span>-->
+      <!--                <a href="" class="main-button">Checkout</a>-->
+      <!--            </div>-->
+
+      <!--            <div class="cart-list" >-->
+      <!--                <div class="cart-shop">-->
+      <!--                    <input type="checkbox" name="" id="" />-->
+      <!--                    <span >shopName</span>-->
+      <!--                </div>-->
+      <!--                &lt;!&ndash;            list Cart&ndash;&gt;-->
+      <!--                <div class="cart-product" th:each="cart:${cartList}">-->
+      <!--                    <div class="image">-->
+      <!--                        <input type="checkbox" name="" id="productCheck" />-->
+      <!--                        <img th:src="@{/resources/image/product/{path}(path=${cart.imagePath})}" alt="" />-->
+      <!--                        <span id="productName" th:text="${cart.productName}">productName</span>-->
+      <!--                    </div>-->
+      <!--                    <div class="price">-->
+      <!--                        <span id="price" th:text="${cart.price}">Rp.000</span>-->
+      <!--                    </div>-->
+      <!--                    <div class="total">-->
+      <!--                        <a href="" class="count-button" id="minusButton">-</a>-->
+      <!--                        <input type="number" class="input-total" name="qty" id="qty" th:value="${cart.qty}"/>-->
+      <!--                        <a href="" class="count-button" id="plusButton">+</a>-->
+      <!--                    </div>-->
+      <!--                    <div class="subtotal">-->
+      <!--                        <span id="total">Rp.000</span>-->
+      <!--                    </div>-->
+      <!--                </div>-->
+      <!--            </div>-->
+      <!--&lt;!&ndash;            end list&ndash;&gt;-->
+      <!--        </form>-->
+      <!--    </div>-->
+    </div>
+    <!-- end main -->
+    <div th:replace="~{layout-customer::footer}"></div>
+    <script>
+      (() => {
+        //  startCalc();
+        //  buttonEqual("plusButton","plus")
+        //  buttonEqual("minusButton","minus")
+      })();
+
+      function startCalc() {
+        interval = setInterval("calc()", 1);
+      }
+
+      function calc() {
+        const listProduct = document.querySelectorAll(".cart-product");
+        for (let i = 0; i < listProduct.length; i++) {
+          let price = listProduct[i].querySelector(".price").textContent.trim();
+          let jumlah = listProduct[i].querySelector(".total input").value;
+          <!--            let total= listProduct[i].querySelector(".subtotal #total").textContent.replace(/[\n.,]/g, '').trim());-->
+          let totalText = listProduct[i].querySelector(".subtotal #total");
+          totalText.textContent = rupiah(price * jumlah);
+        }
+        totalPayment();
+      }
+
+      function totalPayment() {
+        const listProduct = document.querySelectorAll(".cart-product");
+        var hasil = 0;
+        const result = document.querySelector(".checkout span");
+        for (let i = 0; i < listProduct.length; i++) {
+          const checkProduct = listProduct[i].querySelector("#productCheck");
+          if (checkProduct.checked) {
+            let totalHarga = parseFloat(listProduct[i].querySelector(".subtotal #total").textContent.replace("Rp", "").replace(".", "").replace(",", "."));
+            hasil = hasil + totalHarga;
+          }
+        }
+
+        result.textContent = rupiah(hasil);
+      }
+
+      function buttonEqual(buttonPath, equal) {
+        const listCart = document.querySelectorAll(".cart-product");
+        for (let i = 0; i < listCart.length; i++) {
+          const button = listCart[i].querySelector("#" + buttonPath);
+          button.addEventListener("click", (even) => {
+            even.preventDefault();
+            let qty = listCart[i].querySelector("#qty");
+
+            if (equal === "plus") {
+              qty.value = parseFloat(qty.value) + 1;
+            }
+            if (equal === "minus") {
+              qty.value = parseFloat(qty.value) - 1;
+            }
+          });
+        }
+      }
+
+      const rupiah = (number) => {
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+        }).format(number);
+      };
+    </script>
+  </body>
+</html>

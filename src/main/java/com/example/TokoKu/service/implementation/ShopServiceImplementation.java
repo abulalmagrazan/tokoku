@@ -4,6 +4,7 @@ import com.example.TokoKu.dao.ShopRepository;
 import com.example.TokoKu.dto.ListIdValueDto;
 import com.example.TokoKu.dto.display.ProfileDisplayDto;
 import com.example.TokoKu.dto.display.ShopBySellerDto;
+import com.example.TokoKu.dto.display.ShopDetail;
 import com.example.TokoKu.dto.display.ShopProfileDto;
 import com.example.TokoKu.dto.upsert.ShopUpsertDto;
 import com.example.TokoKu.entity.Shop;
@@ -57,6 +58,11 @@ public class ShopServiceImplementation implements ShopService {
     @Override
     public ShopProfileDto findShopProfile(Long shopId, String username) {
         return shopRepository.findShopProfile(shopId,username);
+    }
+
+    @Override
+    public ShopDetail getShop(Long shopId) {
+        return shopRepository.getShop(shopId);
     }
 
 

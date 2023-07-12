@@ -13,14 +13,18 @@
     <div class="header" th:fragment="header">
       <div class="header-wrapper">
         <div class="logo-header">
-          <img th:src="@{/resources/image/logo/logo2.png}" alt="" />
-          <img th:src="@{/resources/image/logo/logo1.png}" alt="" />
+          <div class="logo">
+<!--            <img th:src="@{/resources/image/logo/logo2.png}" alt="" />-->
+            <img th:src="@{/resources/image/logo/logo1.png}" alt="" />
+          </div>
+<!--          <span>Seller</span>-->
         </div>
         <div class="helper">
           <a href="">Bantuan...</a>
         </div>
       </div>
     </div>
+
     <!-- footer -->
     <div class="footer" th:fragment="footer">footer</div>
   </body>
